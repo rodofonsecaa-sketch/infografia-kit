@@ -106,3 +106,11 @@ from chats import chats_js
 OUT.with_name("chats.js").write_text(chats_js(OUT.with_name("data.js").read_text(encoding="utf-8")), encoding="utf-8")
 print(f"auto.js: {len(datos['skills'])} skills, {len(datos['mcp'])} MCP, {len(datos['scripts'])} scripts, {len(datos['proyectos'])} proyectos")
 
+try:
+    import subprocess, time
+    _u = Path(__file__).with_name("uso.js")
+    if not _u.exists() or time.time() - _u.stat().st_mtime > 120:
+        subprocess.Popen(["python", str(Path(__file__).with_name("servicios") / "uso-tokens.py")], creationflags=0x08000000)
+except Exception:
+    pass
+
