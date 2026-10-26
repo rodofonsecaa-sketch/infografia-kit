@@ -78,7 +78,7 @@ def chats(data_txt, maximo=5):
 
 def pbis(data_txt):
     """Archivos .pbip/.pbix dentro de la carpeta de cada proyecto (sin respaldos), para el botón «Abrir en mi PC»."""
-    base = re.search(r'base:\s*"([^"]+)"', data_txt).group(1)
+    base = re.search(r'base:\s*"([^"]*)"', data_txt).group(1) or os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))).replace("\\", "/") + "/"
     out = {}
     for m in re.finditer(r'ruta:"([^"]+)"', data_txt):
         n = re.findall(r'\{n:"([^"]+)"', data_txt[:m.start()])
